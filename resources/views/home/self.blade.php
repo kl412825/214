@@ -23,7 +23,6 @@
             <li><a class='oop' href="/home/money">账户余额</a></li>
             <li><a class='oop' href="/home/user/info">账户信息</a></li>
             <li><a class='oop' href="/user/site">收货地址</a></li>            
-            <li><a class='oop' href="/home/refund">退货申请</a></li>
             <li><a class='oop' href="/home/user/gun">用户退出</a></li>
         </ul>
     </div>
@@ -35,7 +34,7 @@
 
 			@show
             <div class="uc-box">
-            <div class="uc-order-list-box">
+            
             <ul class="uc-order-detail-list">
              </ul>
             </div>

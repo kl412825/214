@@ -263,5 +263,26 @@ class InfoController extends Controller
 
         return view('home.submit',['rs'=>$rs]);
     }
+    function showorder($id){
+        $rs = Dd::where('id',$id)->first();
+        $brr=['未发货','已发货','已收货','未付款','无效订单'];
+        return view('home.showorder',['rs'=>$rs,'brr'=>$brr]);
+    }
+    /**
+     * [money description]
+     * @return [type] [description]
+     */
+    function money(){
+        
+        return view('home.money');
+    }
+    /**
+     * [questatus description]
+     * @return [type] [description]
+     */
+    function questatus(Request $request){
+        $id=$request->input('id');
+        Dd::where('id',$id)->update(['ostatus'=>2]);
+    }
     
 }

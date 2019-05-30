@@ -127,7 +127,7 @@
                         </td>
                         <td class="column-action column-r">
                             <div class="order-info order-action">
-                                <a href="/home/order/showorder/8/30">订单详情</a>
+                                <a href="/home/order/showorder/{{$v->id}}">订单详情</a>
                             </div>
                         </td>
                     </tr>
@@ -182,7 +182,7 @@
                                 </td>
                                 <td class="column-action column-r">
                                     <div class="order-info order-action">
-                                        <a href="/home/order/showorder/3/15">
+                                        <a href="/home/order/showorder/{{$v->id}}">
                                             订单详情
                                             
                                         </a>

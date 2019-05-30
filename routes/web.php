@@ -222,6 +222,12 @@ Route::get('/cart/setstep', 'Home\InfoController@setstep');
 
 //提交订单
 Route::post('/cart/submit', 'Home\InfoController@submit');
+//订单详情
+Route::get('home/order/showorder/{dd}', 'Home\InfoController@showorder');
+//余额
+Route::get('/home/money', 'Home\InfoController@money');
+//确认收货
+Route::post('/home/questatus', 'Home\InfoController@questatus');
 
 
 
