@@ -165,6 +165,10 @@ class DdController extends Controller
            $max=mktime(0,0,0,0,0,$day[0]+1);
            $rs = \DB::select("select ostatus,count(ostatus) num from orders where oaddtime>='{$min}' and oaddtime<='{$max}' group by ostatus");
            $count = \DB::select("select count(ostatus) num from orders where oaddtime>='{$min}' and oaddtime<='{$max}' ");
+            if($rs == null){
+                $arr=[0,0,0,0,0,0,0,0,0,0];
+                return $arr;
+           }
            $arr[]=round($rs[0]->num??0/$count[0]->num??0*100,2);
            $arr[]=round($rs[1]->num??0/$count[0]->num??0*100,2);
            $arr[]=round($rs[2]->num??0/$count[0]->num??0*100,2);
@@ -182,6 +186,10 @@ class DdController extends Controller
            $max=mktime(0,0,0,$day[1]+1,0,$day[0]);
            $rs = \DB::select("select ostatus,count(ostatus) num from  orders  where oaddtime>='{$min}' and oaddtime<='{$max}'  group by ostatus");
            $count = \DB::select("select count(ostatus) num from orders where oaddtime>='{$min}' and oaddtime<='{$max}'");
+            if($rs == null){
+                $arr=[0,0,0,0,0,0,0,0,0,0];
+                return $arr;
+           }
             $arr[]=round($rs[0]->num??0/$count[0]->num??0*100,2);
            $arr[]=round($rs[1]->num??0/$count[0]->num??0*100,2);
            $arr[]=round($rs[2]->num??0/$count[0]->num??0*100,2);

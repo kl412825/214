@@ -213,4 +213,15 @@ Route::post('/user/addcart/del', 'Home\InfoController@onedel');
 Route::get('/user/site', 'Home\InfoController@mysite');
 //收货地址添加
 Route::get('/user/addsite', 'Home\InfoController@addsite');
+//收货地址删除
 Route::post('/user/delsite', 'Home\InfoController@delsite');
+//设置收货
+Route::get('/cart/setaddress', 'Home\InfoController@setaddress');
+//核实订单
+Route::get('/cart/setstep', 'Home\InfoController@setstep');
+
+//提交订单
+Route::post('/cart/submit', 'Home\InfoController@submit');
+
+
+

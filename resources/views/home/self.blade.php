@@ -17,8 +17,8 @@
     </div>
     <div class="box-bd">
         <ul class="uc-nav-list">
-            <li ><a class='oop' href="/home">中心首页</a></li>
-            <li ><a class='oop' href="/home/order">我的订单</a></li>            
+            <li ><a class='oop' href="/home/user/xx">中心首页</a></li>
+            <li ><a class='oop' href="/home/user/dd">我的订单</a></li>            
             <li><a class='oop' href="/home/user/balance">我的收藏</a></li>
             <li><a class='oop' href="/home/money">账户余额</a></li>
             <li><a class='oop' href="/home/user/info">账户信息</a></li>

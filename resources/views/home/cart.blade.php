@@ -114,14 +114,14 @@
                     </font>
                     ）：
                     <font size="5" color="#ff4a00">
-                        ￥<font id='count'>14297</font>&nbsp;元
+                        ￥<font id='count'>0</font>&nbsp;元
                     </font>
                 </strong>
                 <br>
             </span>
         </div>
         <div class="shop-cart-action clearfix">
-            <a class="btn btn-primary btn-next" href="/cart/setaddress">
+            <a class="btn btn-primary btn-next"  onclick='return gogo()' href="/cart/setaddress">
                 去结算
             </a>
             <a class="btn btn-lineDakeLight btn-back" href="/">
@@ -205,5 +205,11 @@
 
 	})
 	}
+    function gogo(){
+       if($('#count').text()=='0'){
+            alert('亲,没有商品哦!');
+            return false;
+       }
+    }
 </script>
 @stop

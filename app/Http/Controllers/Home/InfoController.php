@@ -8,6 +8,7 @@ use App\Model\Admin\User;
 use App\Model\Admin\Balance;
 use App\Model\Admin\Cart;
 use App\Model\Admin\Address;
+use App\Model\Admin\Dd;
 use Session;
 class InfoController extends Controller
 {
@@ -15,22 +16,45 @@ class InfoController extends Controller
 	 * 我的订单
 	 * @return [type] [description]
 	 */
-    function dd(){
-    	return view('home.dd');
+    function dd(Request $request){
+        $rs = User::where('id',Session::get('id'))->first();
+         $ddr=['未发货','已发货','已收货','未付款','无效订单'];
+         $arr = \DB::select("select ostatus,count(ostatus) zong  from orders where uid='59' group by ostatus");
+        foreach($arr as $v){ 
+         //类型 单号           
+            $brr[$v->ostatus]=$v->zong    ;                 
+        }
+        if($request->input('ac')!=null){
+            $crr = Dd::where('uid',Session::get('id'))->where('ostatus',$request->input('ac'))->get();
+        }else{
+            $crr = Dd::where('uid',Session::get('id'))->orderBy('ostatus', 'desc')->get();
+        }
+        
+        
+        return view('home.dd',['rs'=>$rs,'brr'=>$brr,'crr'=>$crr,'ddr'=>$ddr]);
     }
     /**
 	 * 查询中心首页
 	 * @return [type] [description]
 	 */
     function xx(){
-    	return view('home.xx');
+    	$rs = User::where('id',Session::get('id'))->first();
+         $ddr=['未发货','已发货','已收货','未付款','无效订单'];
+         $arr = \DB::select("select ostatus,count(ostatus) zong  from orders where uid='59' group by ostatus");
+        foreach($arr as $v){ 
+         //类型 单号           
+            $brr[$v->ostatus]=$v->zong    ;                 
+        }
+        $crr = Dd::where('uid',Session::get('id'))->orderBy('ostatus', 'desc')->get();
+        
+        return view('home.xx',['rs'=>$rs,'brr'=>$brr,'crr'=>$crr,'ddr'=>$ddr]);
     }
     /**
 	 * 我的收藏
 	 * @return [type] [description]
 	 */
     function collect(){
-    	return view('home.xx');
+        
     }
     /**
 	 * 我的收藏
@@ -38,6 +62,7 @@ class InfoController extends Controller
 	 */
     function balance(){
     	$rs = Balance::where('uid',Session::get("id"))->get();
+
     	return view('home.balance',['rs'=>$rs]);
     }
     /**
@@ -188,8 +213,55 @@ class InfoController extends Controller
     	}
     	
     }
+    /**
+     * [delsite description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     function delsite(Request $request){
     	Address::where('id',$request->input('id'))->delete();
     	return 1;
     }
+    
+    /**
+     * [setaddress description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    function setaddress(Request $request){
+        $rs = Address::where('uid',Session::get('id'))->get();
+        return view('home.setaddress',['rs'=>$rs]);
+    }
+
+    /**
+     * [setstep description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    function setstep(Request $request){
+        
+        $rs = Address::find($request->input('id'));
+        $arr = Cart::where('uid',Session::get('id'))->get();
+        // var_dump($rs);
+        return view('home.setstep',['rs'=>$rs,'arr'=>$arr]);
+    }
+
+
+    /**
+     * [submit description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    function submit(Request $request){
+        $arr=$request->except(['_token']);         
+        if($arr['omsg']==null ||$arr['omsg']==''){
+           $arr['omsg']='未留言';
+        }
+        // var_Dump($arr);
+        $rs = Dd::create($arr);
+        Cart::where('uid',Session::get('id'))->delete();
+
+        return view('home.submit',['rs'=>$rs]);
+    }
+    
 }

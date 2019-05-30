@@ -259,6 +259,11 @@ class IndexController extends Controller
     public function phoneforgotpasswd(){
         return view('home.phoneforgotpasswd');
     }
+    /**
+     * [stmp163 description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function stmp163(Request $request){
         $rs = $request->input('email');
         $rand = $request->input('yzm');
@@ -273,4 +278,5 @@ class IndexController extends Controller
         });
             echo "1";
     }
+
 }
