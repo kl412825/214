@@ -27,9 +27,7 @@ class SuController extends Controller
     	$rs = $request->all();
     	$rs['addtime']=time();
     	$rs['uid'] = session('id');
-        if(empty($rs['path'])){
-            $rs['path'] ='0,';
-        }
+        
     	$da = discuss::create($rs);
         $da['addtime'] = date('Y-m-d H:i:s',$da['addtime']);
 

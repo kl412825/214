@@ -327,7 +327,7 @@
                                  </div>
                                  <br>
                                  <br>
-                                 <a class="buu"  xxoo="{{$v->id}}" href="avascript:void(0);" >回复</a>
+                                 <a class="buu" onclick="hf()"  xxoo="{{$v->id}}" href="avascript:void(0);" >回复</a>
                                     <div style="display: none;" class="su{{$v->id}}">
                                         <br><br>
 
@@ -510,6 +510,7 @@
 <link rel="stylesheet" type="text/css" href="/ad/css/sweetalert.css">
 <script type="text/javascript" src="/ad/js/sweetalert-dev.js"></script>
 
+
     <script type="text/javascript">
         $('#ppx').click(function(){
           
@@ -529,7 +530,9 @@
                },'json')
            
         })
-       
+       function hf(){
+         swal("此功能待修复","有疑问请联系郑纯海")
+       }
 
        
     </script>
