@@ -232,7 +232,7 @@ class GoodsController extends Controller
         $gm->delete();
 
         $res = $gm->gm()->delete();
-
+        DB::table('management')->where('gid',$id)->delete();
         if($res){
 
             return redirect('/admin/good')->with('success','删除成功');

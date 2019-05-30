@@ -241,17 +241,5 @@ $('.bbt').click(function(){
 
 
 </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".xu").click(function(){
-            if(confirm("确定删除吗")){
-                alert("删除成功");
-                return true;
-            }
-            return false;
-        });
-    });
 
-
-</script>
 @stop
