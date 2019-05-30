@@ -18,9 +18,9 @@ Route::get('/admin/captcha','Admin\LoginController@captcha');
 Route::get('/admin/per','Admin\RoleController@rpes');
 //
 //后台
-//权限中间件,'roleper'
+//权限中间件,
 
-Route::group(['middleware' => 'login'], function(){
+Route::group(['middleware' => ['login','roleper']], function(){
 	//后台的首页
 	Route::get('admins','Admin\IndexController@index');
 

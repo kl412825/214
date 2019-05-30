@@ -515,11 +515,31 @@
         $('#ppx').click(function(){
           
           @if(!session('id'))
-          alert('没登录');
-          window.location.replace("/home/user/login");
-          return false;
+             swal({ 
+                    title: "请先 登录", 
+                    text: "是 否 去 登 陆", 
+                    type: "warning",
+                    showCancelButton: true, 
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "去登陆！", 
+                    cancelButtonText: "暂不！",
+                    closeOnConfirm: false, 
+                    closeOnCancel: false    
+                    },
+                    function(isConfirm){ 
+                    if (isConfirm) {
+                       window.location.href="/home/user/login ";
+                    } else { 
+                        swal("取消", "取消登录"); 
+                    } 
+                }
+                )
           @endif
                var name = $('.form-control').val();
+               if(!name){
+                 swal("评论不能为空","注意!!!!!!!")
+                 return false;
+               }
                var id = $('.form-control').attr('name');
                $.get('/pl',{'gid':id,'content':name},function(data){
                   $('.pin').prepend("<li> <div class='article'> <h3 class='art_star clearfix'> <div class='leftPart'> <span class='icon-stat icon-stat-5'> </span> </div> <div class='rightPart'> "+data.addtime+" </div> </h3> <div class='art_content'> "+data.content+" </div> <div class='art_info clearfix'> &nbsp;</div></div><br><br><a class='buu'  xxoo='{{$v->id}}' href='avascript:void(0);'>回复</a> <div style='display: none;' class='su{{$v->id}}'> <br><br> <textarea gid='{{$v->gid}}'  una='{{$v->uid}}' class='ne{{$v->id}}' rows='6' style='width: 100%'></textarea> <input type='hidden' name='_token' value='Mz6HcWtB7p7tLQB0xT0nxNdusWFgeqMk9rcBtdnC'> <br><br> <button class='hf' style='width: 100px;height: 30px;margin-left: 40%'>回复</button> </div> </div> </div> <div class='head_photo'> <img alt='99' src='"+data.img+"'> <h3 class='name'> "+data.uid+" </h3> </div> <br> <br> </li>");

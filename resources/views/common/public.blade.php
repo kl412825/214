@@ -8,7 +8,12 @@
 <meta name="keywords" content="会员登录,DBShop电子商务系统">
 <meta name="description" content="会员登录,DBShop电子商务系统">
 <link href="/ad/css/dbmall.css" rel="stylesheet">
-
+<style type="text/css">
+.site-header .header-info .search-form .search-text{
+    width: 84%;
+    height: 53%;
+}
+</style>
 <link rel="shortcut icon" href="/img/tu.ico">
 
 <script type="text/javascript">
@@ -54,7 +59,7 @@ if (/MSIE 6/.test(navigator.userAgent)) {
 <!--头部-->
 <div class="site-header">
     <div class="container">
-        <div class="site-logo"> <a href="/DBShop/" class="logo"><img src="/ad/picture/shop_logo.png" style="height: 90px;"></a></div>
+        <div class="site-logo"> <a href="/" class="logo"><img src="/ad/picture/logo.gif" style="height: 90px;"></a></div>
         <div class="header-info">
                         <div class="search-section">
                 <form method="get" action="/su" class="search-form clearfix">
@@ -79,21 +84,66 @@ if (/MSIE 6/.test(navigator.userAgent)) {
         <div class="header-nav clearfix">
             <div class="nav-category nav-category-toggled" id="J_categoryContainer">
     <a href="javascript:;" class="btn-category-list">商品分类<span id="goodsclass-b"><i class="iconfont"></i></span></a>
-    @section('type')
 
-    @show
-    <div class="nav-category-section" id="j_nav-category-section" style="display: none;">
+<style type="text/css">
+    .nav-category-section{
+        display: none;
+    }
+</style>
+
+    <div class="nav-category-section" id="j_nav-category-section" ">
+
+          <ul class="nav-category-list">
+     @php
+     use App\Http\Controllers\Admin\TypeController;
+        $res = TypeController::getfenleiMessage(0);
+       
+     @endphp
+        @foreach($res as $v)
+        <li class="nav-category-item">
+            <div class="nav-category-content">
+              @if($v->status ==1)
+                <a href="" class="title">
+                {{$v->tname}}
+                </a>
+                @endif
+                <div class="links">
+                     @foreach($v->sub as $v1)
+                         @if($v1->status ==1)
+                        <a href="/goods/{{$v1->id}}">
+                           {{$v1->tname}}
+
+                        </a>
+                        @endif
+                     @endforeach
+               
+                </div>
+                
+             
+            </div>
+        </li>
+        
+        @endforeach
+    </ul>
     </div>
 </div>
+
 <script>
-    $('#J_categoryContainer').mouseover(function(){
-        $('#j_nav-category-section').css('display', 'block');
-        $('#goodsclass-b').html('<i class="iconfont"></i>');
-    });
-    $("#J_categoryContainer").mouseout(function(){
-        $('#j_nav-category-section').css('display', 'none');
-        $('#goodsclass-b').html('<i class="iconfont"></i>');
-    });
+    @php
+     $a = Request::getRequestUri();
+    @endphp
+    @if($a !='/')
+
+
+        $('#J_categoryContainer').mouseover(function(){
+            $('#j_nav-category-section').css('display', 'block');
+            $('#goodsclass-b').html('<i class="iconfont"></i>');
+        });
+        $("#J_categoryContainer").mouseout(function(){
+            $('#j_nav-category-section').css('display', 'none');
+            $('#goodsclass-b').html('<i class="iconfont"></i>');
+        });
+    @endif
 </script>
 <div class="nav-main">
     <ul class="nav-main-list J_menuNavMain clearfix">
@@ -275,6 +325,5 @@ if (/MSIE 6/.test(navigator.userAgent)) {
 </html>
 
   @section('js')
-    
    
 @show

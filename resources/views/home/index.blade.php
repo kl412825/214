@@ -1,45 +1,14 @@
 ﻿@extends('common/public')
 
 @section('title',$title)
+<style type="text/css">
+    #j_nav-category-section{
+        display: block;
+    }
+</style>
 
-@section('type')
-<link rel="stylesheet" type="text/css" href="/ad/css/sweetalert.css">
-<script type="text/javascript" src="/ad/js/sweetalert-dev.js"></script>
-  <div style="display: block;" class="nav-category-section">
-    <ul class="nav-category-list">
-     @php
-     use App\Http\Controllers\Admin\TypeController;
-        $res = TypeController::getfenleiMessage(0);
-       
-     @endphp
-        @foreach($res as $v)
-        <li class="nav-category-item">
-            <div class="nav-category-content">
-              @if($v->status ==1)
-                <a href="" class="title">
-                {{$v->tname}}
-                </a>
-                @endif
-                <div class="links">
-                     @foreach($v->sub as $v1)
-                         @if($v1->status ==1)
-                        <a href="/goods/{{$v1->id}}">
-                           {{$v1->tname}}
 
-                        </a>
-                        @endif
-                     @endforeach
-               
-                </div>
-                
-             
-            </div>
-        </li>
-        
-        @endforeach
-    </ul>
-</div>
-@stop
+    
 @section('content')
         <div class="container">
             <div class="row">
@@ -67,32 +36,25 @@
                 </div>
                 <div class="col">
                     <div class="home-hd-show container">
+                        @php
+                        $a=0;
+                        @endphp
+                       @foreach($sh as $v)
+                       
+                        @if($v->status == 1 && $a < 4)
                         
-                      
                         <div class="hd-show-item hd-show-item-first">
-                            <a target="_blank" href="">
-                                <img src="/img/1.jpg" border='0'
+                            <a target="{{$v->furl}}" href="">
+                                <img src="{{$v->surl}}" border='0'
                                 />
                             </a>
                         </div>
-                        <div class="hd-show-item ">
-                            <a target="_blank" href="">
-                                <img src="/img/2.jpg" border='0'
-                                />
-                            </a>
-                        </div>
-                        <div class="hd-show-item ">
-                            <a target="_blank" href="">
-                                <img src="/img/3.jpg" border='0'
-                                />
-                            </a>
-                        </div>
-                        <div class="hd-show-item ">
-                            <a target="_blank" href="">
-                                <img src="/img/4.jpg" border='0'
-                                />
-                            </a>
-                        </div>
+                        @php
+                        $a++;
+                        @endphp
+                         @endif
+                        @endforeach
+                   
                     </div>
                 </div>
             </div>
@@ -129,6 +91,7 @@
                     @php
             
                         $txgoods = DB::table('goods')->find($v1->gid);
+                       
                         $mig = DB::table('goodsimg')->where('gid',$txgoods->id)->first();
                         if($txgoods->gstatus ==00){
                             continue;
