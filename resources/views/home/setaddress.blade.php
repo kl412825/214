@@ -22,7 +22,7 @@
                 <div class="buy_address" id="cart_step">
                 	@foreach($rs as $v)
                     <label class="radio selected">
-                        <input type="radio" name="id" @if($v->moren==1)  checked  @endif value="{{$v->id}}">
+                        <input id="chedo" type="radio" name="id" @if($v->moren==1)  checked  @endif value="{{$v->id}}">
                         <font>{{$v->name}}</font>
                         <br>
                         <font>{{$v->cont}}</font>
@@ -48,4 +48,13 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+   function check_address_id(){
+        if ($('#cedo').val()==undefined) {
+            alert('请先添加收货地址');
+            return false;
+        }
+        
+   }
+</script>
 @stop

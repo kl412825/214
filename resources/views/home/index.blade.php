@@ -1,15 +1,12 @@
 ﻿@extends('common/public')
 
 @section('title',$title)
-<style type="text/css">
-    #j_nav-category-section{
-        display: block;
-    }
-</style>
 
 
     
 @section('content')
+<link rel="stylesheet" type="text/css" href="/ad/css/sweetalert.css">
+<script type="text/javascript" src="/ad/js/sweetalert-dev.js"></script>
         <div class="container">
             <div class="row">
                 <div class="col col-16 offset4">
@@ -268,6 +265,7 @@
        <script type="text/javascript">
                  function addcart(gid){
          $.get('/user/addcart',{'gid':gid},function(data){
+            $('input').css('display','none');
                 if (data ==9){
                    swal("购物车", "商品不足!","error");
                     
@@ -301,19 +299,9 @@
                 }
             })
     }
+
        </script>
 
-
-
-
-
-
-
-
-
-           
-
-        </script>
     </body>
 
 </html>

@@ -155,7 +155,7 @@
                                         </button>
                                         <input type="text" style="width:25px;margin-bottom:2px;" name="buy_goods_num"
                                         id="buy_goods_num" value="1">
-                                        <button class="btn btn-primary" id="add_up" style="cursor: pointer; pointer;height: 30px;line-height: 30px;"
+                                        <button class="btn btn-primary" onclick="add_up()" style="cursor: pointer; pointer;height: 30px;line-height: 30px;"
                                         type="button">
                                             +
                                         </button>
@@ -669,8 +669,11 @@
                 }
             })
     };
-
-
+       function add_up(){
+		  alert('123');
+		
+	   }
+        
         
 
     </script>

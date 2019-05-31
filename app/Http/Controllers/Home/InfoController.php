@@ -17,12 +17,19 @@ class InfoController extends Controller
 	 * @return [type] [description]
 	 */
     function dd(Request $request){
+        $brr=[];
         $rs = User::where('id',Session::get('id'))->first();
          $ddr=['未发货','已发货','已收货','未付款','无效订单'];
-         $arr = \DB::select("select ostatus,count(ostatus) zong  from orders where uid='59' group by ostatus");
+         $arr = \DB::select("select ostatus,count(ostatus) zong  from orders where uid=".Session::get('id')." group by ostatus");
         foreach($arr as $v){ 
          //类型 单号           
             $brr[$v->ostatus]=$v->zong    ;                 
+        }
+
+        if(!$brr){
+            $brr[0]=0;
+            $brr[1]=0;
+            
         }
         if($request->input('ac')!=null){
             $crr = Dd::where('uid',Session::get('id'))->where('ostatus',$request->input('ac'))->get();
